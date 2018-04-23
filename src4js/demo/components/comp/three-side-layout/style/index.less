@@ -1,0 +1,44 @@
+.wea-three-side-layout,
+.wea-three-side-layout .three-side-left,
+.wea-three-side-layout .three-side-middle {
+	height: 100%;
+	overflow: hidden;
+}
+.wea-three-side-layout .three-side-left {
+	float: left;
+}
+
+.wea-three-side-layout .three-side-middle {
+	position: relative;
+	background: #e8edf4;
+	.three-side-middle-container{
+		padding: 0 0px 0 8px;
+		box-sizing: border-box;
+		height: 100%;
+		width: 100%;
+	}
+}
+.wea-three-side-layout .three-side-right{
+	position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+	height: 100%;
+	width: 0;
+    background: #fff;
+	box-shadow: -3px 0px 5px #ececec;
+	z-index: 99999999;
+}
+
+
+.wea-three-side-layout .wea-three-side-layout-show-left{
+	width: 18px;
+	height: 60px;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin-top: -30px;
+	z-index: 11;
+	cursor: pointer;
+	background-size: 100% 100%;
+}

@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "exclude": [
+        "src/mobile",
+        "src/pc",
+        "src/pc4backstage",
+        "src/pc4com",
+        "src/pc4public",
+        "node_modules"
+    ]
+}

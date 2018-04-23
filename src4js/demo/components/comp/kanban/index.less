@@ -1,0 +1,51 @@
+.column-header {
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 16px;
+    border-radius: 2px 2px 0 0;
+    zoom: 1;
+    margin-bottom: -1px;
+    min-height: 48px;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    .ant-dropdown-link{
+        float: right;
+        font-size: 16px;
+        font-weight: 700;
+        color: #484848;
+    }
+}
+.mode-kanban {
+    height: 100%;
+    .ant-row,
+    [class*=" ant-col"],
+    [class^=ant-col] {
+        height: 100%
+    }
+    .mode-kanban-column-placeholder {
+        border: 2px dashed #000;
+        display: none;
+        width: 100%;
+        height: 100%;
+    }
+    .mode-kanban-item-placeholder{
+        border: 2px dashed #000;
+        display: none;
+        height: 88px;
+        margin: -2px;
+    }
+    .mode-kanban-column {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+        height: 100%;
+        margin-left: 8px;
+        margin-right: 8px;
+        border: 1px solid #e9e9e9;
+    }
+}
+.item-header{
+    margin: 10px 0
+}

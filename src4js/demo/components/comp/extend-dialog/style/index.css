@@ -1,0 +1,96 @@
+.extend-dialog iframe {
+    border: none;
+}
+
+.extend-dialog .extend-dialog-header-icon{
+    display: inline-block;
+    height: 48px;
+    width: 35px;
+    text-align: center
+}
+.extend-dialog .extend-dialog-header-icon:hover{
+    color:#666 !important;
+}
+.extend-dialog-allscreen{
+    top:  10 !important;
+    left: 0 !important;
+    padding-bottom: 0;
+    transform: translate(0px, 0px)!important;
+}
+ 
+.extend-dialog .ant-modal-body {
+    padding: 0;
+}
+
+.extend-dialog .ant-modal-content .ant-modal-header {
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.extend-dialog .ant-modal-footer button {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.extend-dialog .ant-modal-footer button:last-child {
+    margin-right: 0;
+}
+
+.extend-dialog .ant-modal-footer button {
+    border-radius: 3px;
+}
+
+.extend-dialog .extend-dialog-body {
+    position: relative;
+}
+
+.extend-dialog .extend-dialog-menu{
+    position: absolute;
+    bottom: 21px;
+    right: 0px;
+    max-width: 200px;
+    border: 1px solid #dadada;
+    box-shadow: 0 0 2px #dadada;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+.extend-dialog-menu{
+    background-color: #fff;
+}
+.extend-dialog-menu .ant-menu {
+    margin: 10px 0;
+    border: 0;
+    text-align: left;
+}
+.extend-dialog-menu .ant-menu .ant-menu-item-selected {
+    border: 0;
+    color: #000;
+}
+.extend-dialog-menu .ant-menu .ant-menu-item-active{
+    background-color: #57c5f7;
+    color:#fff;
+}
+
+.extend-dialog-menu .ant-menu .ant-menu-item {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 8px 0 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.extend-dialog-menu .ant-menu .ant-menu-item .extend-dialog-menu-icon {
+    display: inline-block;
+    width: 36px;
+    margin-right: 6px;
+    text-align: center;
+}
+.extend-dialog-menu .extend-right-menu-icon-background{
+    width: 36px;
+    height: 100%;
+    background-color: #f2f5f7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
