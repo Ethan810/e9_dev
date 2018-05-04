@@ -8,7 +8,7 @@ import './style/index';
 import Home from './components/Home'
 import Demo from './components/Demo';
 
-window.prj_store = store; 
+window.test_store = store; 
 
 class Error extends React.Component {
     render() { 
@@ -20,7 +20,7 @@ class Error extends React.Component {
 
 
 const  Routes = (
-    <Route path="prj" component={Home}>
+    <Route path="test" component={Home}>
         <Route path="demo" component={Demo} ></Route>
         <Route path="*" component={Error}></Route>
     </Route>

@@ -18,9 +18,9 @@ const browserHistory = useRouterHistory(createHashHistory)({
 });
 
 
-import Prj from './index.js';
-const PrjStore = Prj.store;
-const PrjRoute = Prj.Route;
+import Test from './index.js';
+const TestStore = Test.store;
+const TestRoute = Test.Route;
 
 const history = syncHistoryWithStore(browserHistory, routingStore);
 window.weaHistory = history;
@@ -29,7 +29,7 @@ window.weaHistory = history;
 let store = {
     // Key can be whatever you want
     routing: routingStore,
-    ...PrjStore
+    ...TestStore
 }
 
 const Home = props => props.children;
@@ -41,7 +41,7 @@ class Root extends React.Component {
             <Provider {...store}>
                 <Router history={history}>
                     <Route name="main" breadcrumbName="入口" path="main" component={Home}>
-                        {PrjRoute}
+                        {TestRoute}
                     </Route>
                 </Router>
             </Provider>
