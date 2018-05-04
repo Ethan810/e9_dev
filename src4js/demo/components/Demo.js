@@ -1,101 +1,183 @@
 import React from 'react';
-import { Button, Tabs , Tree, Menu, TopTitle} from 'antd';
 import { inject, observer } from 'mobx-react';
-import StateLessComponent from './test/StateLessComponent'
-import projectExecute from './projectExecute';
-import Synergy from './Synergy';
-import {WeaTop ,WeaLeftRightLayout} from "ecCom"
+import { NavBar, Icon, TabBar,  } from 'antd-mobile';
+import List from "./list";
+import KouBei from "./KouBei";
 
-const NavTree = Tree.NavTree;
+
+const CustomIcon = ({ type, className = '', size = 'md', ...restProps }) => {
+   return (
+        <svg
+            className={`am-icon am-icon-${type.substr(1)} am-icon-${size} ${className}`}
+            {...restProps}
+        >
+            <use xlinkHref={type} /> {/* svg-sprite-loader@0.3.x */}
+            {/* <use xlinkHref={#${type.default.id}} /> */} {/* svg-sprite-loader@latest */}
+        </svg>
+    )
+};
+
+
 class Demo2 extends React.Component {
-    render() {
-        return (
-            <div onClick={this.props.onClick}>{this.props.text}</div>
-        )
-    }
-}
-
-const datas = [
-    {
-        name: "应用1",
-        primaryKey: "1",
-        parentKey: "",
-        children: [{
-            name: "应用2",
-            primaryKey: "2",
-            parentKey: "1",
-        }]
-    }
-]
-
-const datas2 = [
-    {
-        name: "项目1",
-        primaryKey: 1,
-        subName: "aaaaaa"
-    }
-]
-const getDocker = { getDockerHeight: () => document.documentElement.clientHeight };
-
-class Demo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: 0
-        }
+            selectedTab: 'redTab',
+            hidden: false,
+            fullScreen: false,
+        };
     }
-    componentDidMount() {
-        jQuery(window).resize(() => {
-            if (this.timer) {
-                clearTimeout(this.timer);
-            }
-            this.timer = setTimeout(() => {
-                this.forceUpdate();
-            }, 200);
-        });
-    }
-    handleClick = () => {
-
+    renderContent(pageText) {
+        return (
+            <div style={{ backgroundColor: 'white', height: "100%", textAlign: 'center' }}>
+                <div style={{ paddingTop: 60 }}>Clicked “{pageText}” tab， show “{pageText}” information</div>
+                <a style={{ display: 'block', marginTop: 40, marginBottom: 20, color: '#108ee9' }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        this.setState({
+                            hidden: !this.state.hidden,
+                        });
+                    }}
+                >
+                    Click to show/hide tab-bar
+            </a>
+                <a style={{ display: 'block', color: '#108ee9' }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        this.setState({
+                            fullScreen: !this.state.fullScreen,
+                        });
+                    }}
+                >
+                    Click to switch fullscreen
+            </a>
+            </div>
+        );
     }
     render() {
         return (
-            <div>
-                <WeaTop
-                    title={"title"}
-                    loading={false}
-                    icon={"icon-coms-crm"}
-                    iconBgcolor={"red"}
-                    buttons={[]}
-                    buttonSpace={10}
-                    showDropIcon={true}
-                    dropMenuDatas={[]}
+            <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
+                <TabBar
+                    unselectedTintColor="#949494"
+                    tintColor="#33A3F4"
+                    barTintColor="white"
+                    hidden={this.state.hidden}
                 >
-                     <WeaLeftRightLayout defaultShowLeft={true}
-                        leftCom={<div>fffff</div>}
-                        leftWidth={25}>
-                        {/* { contentDiv } */}
-                        </WeaLeftRightLayout>
-                </WeaTop>
-                <Synergy  />
+                    <TabBar.Item
+                        title="Life"
+                        key="Life"
+                        icon={<CustomIcon type={require('!svg-sprite!../static/back.svg')} />}
+                        // icon={<div style={{
+                        //     width: '22px',
+                        //     height: '22px',
+                        //     background: 'url(/images/bg/1_wev8.jpg) center center /  21px 21px no-repeat'
+                        // }}
+                        //  />
+                        // }
+                        // icon={<div style={{
+                        //     width: '22px',
+                        //     height: '22px',
+                        //     background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat'
+                        // }}
+                        //  />
+                        // }
+                        selectedIcon={<div style={{
+                            width: '22px',
+                            height: '22px',
+                            background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat'
+                        }}
+                        />
+                        }
+                        selected={this.state.selectedTab === 'blueTab'}
+                        badge={1}
+                        onPress={() => {
+                            this.setState({
+                                selectedTab: 'blueTab',
+                            });
+                        }}
+                        data-seed="logId"
+                    >
+                            <List   />
+                    </TabBar.Item>
+                    <TabBar.Item
+                        icon={
+                            <div style={{
+                                width: '22px',
+                                height: '22px',
+                                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat'
+                            }}
+                            />
+                        }
+                        selectedIcon={
+                            <div style={{
+                                width: '22px',
+                                height: '22px',
+                                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat'
+                            }}
+                            />
+                        }
+                        title="Koubei"
+                        key="Koubei"
+                        badge={'new'}
+                        selected={this.state.selectedTab === 'redTab'}
+                        onPress={() => {
+                            this.setState({
+                                selectedTab: 'redTab',
+                            });
+                        }}
+                        data-seed="logId1"
+                    >
+                        <KouBei   />
+                    </TabBar.Item>
+                    <TabBar.Item
+                        icon={
+                            <div style={{
+                                width: '22px',
+                                height: '22px',
+                                background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat'
+                            }}
+                            />
+                        }
+                        selectedIcon={
+                            <div style={{
+                                width: '22px',
+                                height: '22px',
+                                background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat'
+                            }}
+                            />
+                        }
+                        title="Friend"
+                        key="Friend"
+                        dot
+                        selected={this.state.selectedTab === 'greenTab'}
+                        onPress={() => {
+                            this.setState({
+                                selectedTab: 'greenTab',
+                            });
+                        }}
+                    >
+                        {this.renderContent('Friend')}
+                    </TabBar.Item>
+                    <TabBar.Item
+                        icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
+                        selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
+                        title="My"
+                        key="my"
+                        selected={this.state.selectedTab === 'yellowTab'}
+                        onPress={() => {
+                            this.setState({
+                                selectedTab: 'yellowTab',
+                            });
+                        }}
+                    >
+                        {this.renderContent('My')}
+                    </TabBar.Item>
+                </TabBar>
+
             </div>
         )
     }
 }
 
-export default Demo;
+export default Demo2;
 
-
-{/* <Tabs>
-                <Tabs.TabPane key="1" tab="项目信息">
-                    
-                </Tabs.TabPane>
-                <Tabs.TabPane key="2" tab="日报">
-                     <StateLessComponent text={this.state.time} onClick={() => { this.setState({ time: this.state.time + 2 }) }} />
-                </Tabs.TabPane>
-                <Tabs.TabPane key="3" tab="资源">
-                </Tabs.TabPane>
-                <Tabs.TabPane key="4" tab="看板">
-                </Tabs.TabPane>
-                <Tabs.TabPane key="5" tab="甘特图">
-                </Tabs.TabPane>
-            </Tabs> */}

@@ -3,7 +3,6 @@ import {IndexRedirect} from 'react-router';
 import { WeaErrorPage } from 'ecCom'
 
 import store from './stores';
-import './index.css'
 import './style/index';
 
 import Home from './components/Home'
@@ -22,7 +21,6 @@ class Error extends React.Component {
 
 const  Routes = (
     <Route path="prj" component={Home}>
-        
         <Route path="demo" component={Demo} ></Route>
         <Route path="*" component={Error}></Route>
     </Route>

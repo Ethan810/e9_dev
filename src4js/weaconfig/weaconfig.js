@@ -39,6 +39,8 @@ exports.create = function (obj, mode, node_env) {
             compress: {
                 warnings: false,
                 // screw_ie8: false
+                drop_console: true,//console
+                pure_funcs: ['console.log']//移除console
             },
             sourceMap: true,
             // mangle: { screw_ie8: false },
@@ -46,7 +48,7 @@ exports.create = function (obj, mode, node_env) {
         }));
     }
 
-    var styleUrl = obj.isOutput2Custom?obj.style2Custom:obj.styleUrl;
+    var styleUrl = obj.isOutput2Custom ? obj.style2Custom : obj.styleUrl;
 
     plugins.push(new ExtractTextPlugin(styleUrl, {
         disable: obj.styleUrl ? false : true,
@@ -59,7 +61,7 @@ exports.create = function (obj, mode, node_env) {
         'process.env.NODE_ENV': "'"+node_env+"'" //production
     }));
 
-    if(obj.isCssSplit) plugins.push(new CSSSplitWebpackPlugin(
+    if(obj.isCssSplit) plugins.push(new CSSSplitWebpackPlugin(   //css分割
         {
             size: 3500,
             filename:styleUrl.substring(0,styleUrl.length-4)+"-[part].[ext]"
@@ -87,7 +89,7 @@ exports.create = function (obj, mode, node_env) {
         "compact" : true
     }
 
-    if(node_env==="development") {
+    if(node_env==="development") {    //开发模式加的
         babelQuery["env"] = {
             // only enable it when process.env.NODE_ENV is 'development' or undefined
             "development": {
@@ -149,6 +151,7 @@ exports.create = function (obj, mode, node_env) {
             { 'weaCom': 'weaCom' },
             { 'ecCom': 'ecCom' },
             { 'weaWorkflow': 'weaWorkflow' },
+            { 'weaWorkflowForm': 'weaWorkflowForm' },
             { 'weaWorkflowEngine': 'weaWorkflowEngine' },
             { 'weaPortal': 'weaPortal' },
             { 'weaPortalTheme': 'weaPortalTheme' },
@@ -157,6 +160,7 @@ exports.create = function (obj, mode, node_env) {
             { 'weaBlog' : 'weaBlog' },
             { 'weaMeeting' : 'weaMeeting' },
             { 'weaFna' : 'weaFna' },
+		    {'weaFnaEngine' : 'weaFnaEngine'},
             { 'weaDoc' : 'weaDoc' },
             { 'weaHrm' : 'weaHrm' },
             { 'weaInte' : 'weaInte' },
@@ -170,19 +174,22 @@ exports.create = function (obj, mode, node_env) {
             { 'weaCowork' : 'weaCowork' },
             { 'mobx' : 'mobx' },
             { 'weaSmallApp': 'weaSmallApp' },
+            { 'weaSmallAppEngine': 'weaSmallAppEngine' },
             { 'weaESearch': 'weaESearch' },
             { 'weaFnaSpecial': 'weaFnaSpecial' }, 
             { 'weaMobilemodeEngine': 'weaMobilemodeEngine' },
             { 'weaFormmodeEngine': 'weaFormmodeEngine' },
             { 'weaCrmEngine': 'weaCrmEngine' },
+            { 'weaHrmEngine': 'weaHrmEngine' },
             { 'weaOdoc': 'weaOdoc' },
             { 'weaEmail': 'weaEmail' },
-            { 'weaLanguageEngine': 'weaLanguageEngine'},
             { 'weaCpt': 'weaCpt' },
             { 'weaPrj': 'weaPrj' },
             { 'weaCrm': 'weaCrm' },
-            { 'weaCptEngine': 'weaCptEngine' },
-            { 'ljcCom': 'ljcCom' },
+            { 'weaWorkrelate': 'weaWorkrelate' },
+            {'cubeComs': 'cubeComs'},
+            {'weaCptEngine':'weaCptEngine'},
+            { 'weaCube': 'weaCube' },
         ],
         module: {
             // preLoaders: [
@@ -228,7 +235,7 @@ exports.create = function (obj, mode, node_env) {
         wp4ec.output.libraryTarget = obj.outputlib.libraryTarget;
     }
 
-    if (obj.ismobile) {
+    if (obj.ismobile) {          //移动端的添加
         wp4ec.babel.plugins.push('transform-runtime');
         wp4ec.babel.plugins.push(['antd', {
             style: 'css',  // if true, use less
@@ -246,7 +253,7 @@ exports.create = function (obj, mode, node_env) {
             libraryName: 'newporject'
         }]);
     }
-    return "release" === mode ? wp4ec : function (webpackConfig) {
+    return "release" === mode ? wp4ec : function (webpackConfig) {   //走打包模式还是调试模式，这里走的直接是打包模式
         webpackConfig.entry = { index: obj.entry };
         webpackConfig.externals = [
           { 'react': 'React' },
@@ -256,6 +263,7 @@ exports.create = function (obj, mode, node_env) {
           { 'weaCom': 'weaCom' },
           { 'ecCom': 'ecCom' },
           { 'weaWorkflow': 'weaWorkflow' },
+          { 'weaWorkflowForm': 'weaWorkflowForm' },
           { 'weaWorkflowEngine': 'weaWorkflowEngine' },
           { 'weaPortal': 'weaPortal' },
           { 'weaPortalTheme': 'weaPortalTheme' },
@@ -282,14 +290,16 @@ exports.create = function (obj, mode, node_env) {
           { 'weaMobilemodeEngine': 'weaMobilemodeEngine' },
           { 'weaFormmodeEngine': 'weaFormmodeEngine' },
           { 'weaCrmEngine': 'weaCrmEngine' },
+          { 'weaHrmEngine': 'weaHrmEngine' },
           { 'weaOdoc': 'weaOdoc' },
           { 'weaEmail': 'weaEmail' },
           { 'weaLanguageEngine':'weaLanguageEngine'},
           { 'weaCpt': 'weaCpt' },
           { 'weaPrj': 'weaPrj' },
           { 'weaCrm': 'weaCrm' },
-          { 'weaCptEngine': 'weaCptEngine' },
-          { 'ljcCom': 'ljcCom' },
+          { 'weaWorkrelate': 'weaWorkrelate' },
+          {'cubeComs': 'cubeComs'},
+          {'weaCptEngine':'weaCptEngine'}
         ];
         if (obj.ismobile) {
             webpackConfig.babel.plugins.push('transform-runtime');

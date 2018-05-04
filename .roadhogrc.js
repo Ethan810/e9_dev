@@ -13,14 +13,14 @@ export default {
             'transform-decorators-legacy',
             'dva-hmr',
             'transform-runtime',
-            ["import", { libraryName: "mode-coms", style: true }]
+            ["import", { libraryName: "antd-mobile", style: 'css' }]
         ]
     },
     production: {
         extraBabelPlugins: [
             'transform-decorators-legacy',
             'transform-runtime',
-            ["import", { libraryName: "mode-coms", style: true }]
+            ["import", { libraryName: "antd-mobile", style: 'css' }]
         ]
     }
 },
@@ -186,11 +186,11 @@ export default {
         "^/css/": "/css/"
       }
     },
-    "/hrm/*": {
+    "/src4js/*": {
       "target": "http://127.0.0.1:8080/",
       "changeOrigin": true,
       "pathRewrite": {
-        "^/hrm/": "/hrm/"
+        "^/src4js/": "/src4js/"
       }
     },
   },

@@ -1,3 +1,2 @@
-import './test.less'
-import './add.css'
-import './card.less'
+import './test.less';
+import './basic.less';
